@@ -1,35 +1,19 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "ES2022",
-    "lib": ["ES2023", "DOM", "DOM.Iterable"],
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "allowJs": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "strict": true,
-    "esModuleInterop": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "resolveJsonModule": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "declaration": true,
-    "declarationMap": true,
-    "outDir": "./dist",
-    "rootDir": ".",
-    "types": ["node", "vitest/globals"],
-    "paths": {
-      "@codeagora/shared": ["./packages/shared/src/index.ts"],
-      "@codeagora/shared/*": ["./packages/shared/src/*"],
-      "@codeagora/core": ["./packages/core/src/index.ts"],
-      "@codeagora/core/*": ["./packages/core/src/*"],
-      "@codeagora/github": ["./packages/github/src/index.ts"],
-      "@codeagora/github/*": ["./packages/github/src/*"],
-      "@codeagora/cli": ["./packages/cli/src/index.ts"],
-      "@codeagora/cli/*": ["./packages/cli/src/*"],
-      "@codeagora/mcp": ["./packages/mcp/src/index.ts"],
-      "@codeagora/mcp/*": ["./packages/mcp/src/*"]
-    }
+    "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "./packages/*/src/**/*.ts"
-  ],
-  "exclude": ["node_modules", "dist"]
+  "include": ["packages/*/src/**/*.ts"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts"]
 }

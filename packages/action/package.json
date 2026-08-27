@@ -1,0 +1,10 @@
+{
+  "name": "@using-agora/action",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@using-agora/contracts": "workspace:*",
+    "@using-agora/review-core": "workspace:*"
+  }
+}
