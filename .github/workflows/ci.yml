@@ -7,26 +7,17 @@ on:
     branches: [main]
 
 jobs:
-  test:
+  verify:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20, 22]
     steps:
-      - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm typecheck
-      - run: pnpm lint
-      - run: pnpm build
-      - run: pnpm test --no-file-parallelism
-      - name: Security regression gate
-        if: matrix.node-version == 20
-        run: pnpm test:security
-      - name: Deterministic benchmark gate
-        if: matrix.node-version == 20
-        run: pnpm bench:ci
+          node-version: 24
+      - run: bun install --frozen-lockfile
+      - run: bun run typecheck
+      - run: bun run lint
+      - run: bun run test
+      - run: bun run build:action
+      - run: bun run verify:action

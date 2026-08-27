@@ -1,97 +1,12 @@
-# Dependencies
 node_modules/
-.pnpm-store/
-
-# Build outputs (allow dist/action.js for GitHub Action)
+.bun/
+bun.lockb
 dist/*
 !dist/action.js
-packages/*/dist/
-packages/site/.astro/
-packages/site/public/
-*.tsbuildinfo
-
-# Environment & Secrets
-.env
-.env.local
-.env.production
-.env.*.local
-*.key
-secrets/
-*.secret
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Test coverage
 coverage/
-.nyc_output/
-
-# Logs
+.env
+.env.*
+!.env.example
 *.log
-npm-debug.log*
-pnpm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Temporary files
-/tmp/
-*.tmp
-
-# Review results & cache
-.reviews/
-reviews/
-bench-out*/
-.cache/
-.review-cache/
-
-# CodeAgora session data & config (local)
-.ca/
-packages/web/.ca/
-# Benchmark config is committed; runtime session data stays local.
-!benchmarks/.ca/
-benchmarks/.ca/sessions/
-benchmarks/.ca/logs/
-benchmarks/.ca/cache/
-benchmarks/.ca/model-quality.json
-
-# Storage
-.storage/
-*.db
-*.sqlite
-
-# OMC
-.omc
-
-# Agent-local planning/evidence
-.sisyphus/
-.codex/
-.omo/
-.cmux/
-.opencode/
-.research/
-.slim/
-
-# Archives
-.archive/
-
-# CodeAgora runtime (local data, not shared)
-.codeagora/
-.ca/sessions/
-.ca/logs/
-.ca/model-quality.json
-.ca/dashboard-token
-.claude/worktrees/
-
-# Playwright MCP runtime
-.playwright-mcp/
-
-# E2E test screenshots
-web-e2e-*.png
-.vercel
+.DS_Store
+.gjc/

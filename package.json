@@ -1,117 +1,20 @@
 {
-  "name": "@codeagora/review",
-  "version": "0.1.2",
+  "name": "using-agora",
+  "private": true,
   "type": "module",
-  "description": "Multi-LLM code review pipeline — parallel reviewers, structured debate, consensus verdict",
-  "license": "MIT",
-  "packageManager": "pnpm@10.30.3",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bssm-oss/CodeAgora.git"
-  },
-  "homepage": "https://github.com/bssm-oss/CodeAgora#readme",
-  "bugs": {
-    "url": "https://github.com/bssm-oss/CodeAgora/issues"
-  },
-  "keywords": [
-    "code-review",
-    "llm",
-    "multi-agent",
-    "cli",
-    "ai",
-    "static-analysis"
+  "workspaces": [
+    "packages/*"
   ],
-  "engines": {
-    "node": ">=20"
-  },
-  "files": [
-    "packages/cli/dist/**/*.js",
-    "packages/shared/src/data/**",
-    "scripts/postinstall.cjs",
-    "README.md",
-    "LICENSE"
-  ],
-  "bin": {
-    "codeagora": "./packages/cli/dist/index.js",
-    "agora": "./packages/cli/dist/index.js"
-  },
   "scripts": {
-    "postinstall": "node scripts/postinstall.cjs",
-    "build": "pnpm -r build",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint \"packages/*/src/**/*.ts\" \"packages/*/scripts/**/*.{js,mjs,ts}\" \"src/tests/**/*.ts\" \"scripts/**/*.{js,mjs,ts}\" \"vitest.config.ts\" \"eslint.config.js\" --quiet",
-    "test": "vitest run",
-    "test:all": "vitest run",
-    "test:coverage": "vitest run --coverage",
-    "test:security": "vitest run src/tests/redaction-boundaries.test.ts src/tests/config-path-security.test.ts src/tests/github-action-diff-path-security.test.ts src/tests/github-action-sarif-path.test.ts src/tests/large-diff-security-priority.test.ts src/tests/utils-path-validation.test.ts src/tests/desktop-webdriver-security.test.ts src/tests/desktop-tauri-capabilities.test.ts packages/core/src/tests/prompt-injection-boundaries.test.ts packages/mcp/src/tests/critical-errors.test.ts packages/github/src/tests/critical-github-errors.test.ts",
-    "dev": "pnpm --filter @codeagora/cli dev",
-    "desktop:evidence": "pnpm --filter @codeagora/desktop evidence",
-    "desktop:bundle": "pnpm --filter @codeagora/desktop tauri:build",
-    "desktop:bundle-smoke": "pnpm --filter @codeagora/desktop bundle:smoke",
-    "desktop:app-e2e": "pnpm --filter @codeagora/desktop app:e2e",
-    "desktop:live-review-smoke": "pnpm --filter @codeagora/desktop live:review-smoke",
-    "desktop:macos-webdriver-e2e": "pnpm --filter @codeagora/desktop macos:webdriver-e2e",
-    "desktop:smoke": "pnpm --filter @codeagora/desktop smoke",
-    "desktop:tauri-test": "pnpm --filter @codeagora/desktop tauri:test",
-    "desktop:visual-qa": "pnpm --filter @codeagora/desktop visual:qa",
-    "rc:desktop-gate": "node scripts/desktop-release-gate-runner.mjs",
-    "rc:desktop-distribution-gate": "node scripts/desktop-rc-distribution-gate.mjs",
-    "desktop:unsigned-dmg-gate": "node scripts/desktop-unsigned-dmg-gate.mjs",
-    "evidence:manifest": "node scripts/evidence-manifest.mjs",
-    "evidence:gate-status": "node scripts/release-gate-evaluator.mjs",
-    "evidence:security-smoke": "node scripts/security-evidence-smoke.mjs",
-    "evidence:redaction-path-safety": "node scripts/redaction-path-safety-evidence.mjs",
-    "evidence:github-security": "node scripts/github-security-evidence.mjs",
-    "evidence:desktop-security": "node scripts/desktop-security-evidence.mjs",
-    "evidence:github-action-pr-smoke": "node scripts/github-action-pr-smoke-recorder.mjs",
-    "evidence:github-action-stable": "node scripts/github-action-stable-evidence.mjs",
-    "evidence:vercel-production": "node scripts/vercel-production-evidence.mjs",
-    "smoke:cli-clean-diff": "node scripts/cli-clean-diff-smoke.mjs",
-    "smoke:cli-staged-diff": "node scripts/cli-clean-diff-smoke.mjs --fixture staged-diff",
-    "smoke:cli-patch-file": "node scripts/cli-clean-diff-smoke.mjs --fixture patch-file",
-    "smoke:cli-invalid-config": "node scripts/cli-clean-diff-smoke.mjs --fixture invalid-config",
-    "smoke:cli-missing-provider-key": "node scripts/cli-clean-diff-smoke.mjs --fixture missing-provider-key",
-    "smoke:cli-provider-failure": "node scripts/cli-clean-diff-smoke.mjs --fixture provider-failure",
-    "smoke:cli-timeout-runtime": "node scripts/cli-clean-diff-smoke.mjs --fixture timeout-runtime",
-    "build:action": "node scripts/build-action.mjs",
-    "release:beta-smoke": "node scripts/beta-smoke.mjs",
-    "bench:fn": "tsx scripts/bench-fn.ts",
-    "bench:fn:run": "tsx scripts/bench-fn-run.ts",
-    "bench:fn:compare": "tsx scripts/bench-fn-compare.ts",
-    "bench:reference": "tsx scripts/bench-reference-check.ts",
-    "bench:ci": "pnpm bench:fn -- --validate-only && pnpm bench:reference -- --validate-only",
-    "bench:rate-limit": "tsx scripts/bench-rate-limit-sim.ts",
-    "site:build": "pnpm --filter @codeagora/site build",
-    "site:dev": "pnpm --filter @codeagora/site dev",
-    "site:smoke": "pnpm --filter @codeagora/site smoke"
-  },
-  "dependencies": {
-    "@ai-sdk/anthropic": "^3.0.58",
-    "@ai-sdk/groq": "^3.0.27",
-    "@ai-sdk/openai": "^3.0.41",
-    "@ai-sdk/openai-compatible": "^2.0.33",
-    "@clack/prompts": "^1.1.0",
-    "@octokit/auth-app": "^8.2.0",
-    "@octokit/rest": "^22.0.1",
-    "@openrouter/ai-sdk-provider": "^2.2.3",
-    "ai": "^6.0.111",
-    "commander": "^14.0.3",
-    "ora": "^9.3.0",
-    "picocolors": "^1.1.1",
-    "yaml": "^2.8.2",
-    "zod": "^3.22.4"
+    "lint": "biome check .",
+    "test": "bun test",
+    "build:action": "bun build packages/action/src/index.ts --target=node --outfile=dist/action.js",
+    "verify:action": "node dist/action.js"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
-    "@types/node": "^20.11.5",
-    "@vitest/coverage-v8": "^1.6.1",
-    "astro": "^5.18.2",
-    "esbuild": "^0.27.4",
-    "eslint": "^10.0.3",
-    "tsup": "^8.0.1",
-    "tsx": "^4.21.0",
-    "typescript": "^5.3.3",
-    "typescript-eslint": "^8.57.0",
-    "vitest": "^1.2.0"
+    "@biomejs/biome": "^2.1.4",
+    "@types/node": "24",
+    "typescript": "^5.8.3"
   }
 }
